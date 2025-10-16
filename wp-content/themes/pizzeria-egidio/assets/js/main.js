@@ -2,54 +2,7 @@
  * JavaScript principale per Pizzeria Egidio
  */
 
-(function($) {
-    'use strict';
 
-    // Document ready
-    $(document).ready(function() {
-        initMobileMenu();
-        initScrollEffects();
-        initSmoothScrolling();
-        initAnimations();
-        initContactForm();
-    });
-
-    /**
-     * Inizializza il menu mobile
-     */
-    function initMobileMenu() {
-        const $mobileToggle = $('#mobile-menu-toggle');
-        const $mainNav = $('#main-nav');
-        
-        $mobileToggle.on('click', function() {
-            $mainNav.toggleClass('active');
-            const $icon = $(this).find('i');
-            
-            if ($mainNav.hasClass('active')) {
-                $icon.removeClass('bi-list').addClass('bi-x-lg');
-            } else {
-                $icon.removeClass('bi-x-lg').addClass('bi-list');
-            }
-        });
-
-        // Chiudi menu quando si clicca su un link
-        $mainNav.find('a').on('click', function() {
-            if ($(window).width() <= 768) {
-                $mainNav.removeClass('active');
-                $mobileToggle.find('i').removeClass('bi-x-lg').addClass('bi-list');
-            }
-        });
-
-        // Chiudi menu quando si ridimensiona la finestra
-        $(window).on('resize', function() {
-            if ($(window).width() > 768) {
-                $mainNav.removeClass('active');
-                $mobileToggle.find('i').removeClass('bi-x-lg').addClass('bi-list');
-            }
-        });
-    }
-
-    /**
      * Effetti di scroll per header
      */
     function initScrollEffects() {
@@ -254,6 +207,83 @@
     });
 
 })(jQuery);
+
+// Versione vanilla JavaScript - FUNZIONANTE
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Vanilla JS - DOM caricato');
+    
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    
+    console.log('Elementi trovati:', {
+        toggle: !!mobileToggle,
+        nav: !!mainNav
+    });
+    
+    if (mobileToggle && mainNav) {
+        console.log('Menu mobile inizializzato con vanilla JS');
+        
+        mobileToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Click sul pulsante mobile menu (vanilla JS)');
+            
+            mainNav.classList.toggle('active');
+            const icon = mobileToggle.querySelector('i');
+            
+            if (mainNav.classList.contains('active')) {
+                icon.classList.remove('bi-list');
+                icon.classList.add('bi-x-lg');
+                console.log('Menu aperto (vanilla JS)');
+            } else {
+                icon.classList.remove('bi-x-lg');
+                icon.classList.add('bi-list');
+                console.log('Menu chiuso (vanilla JS)');
+            }
+        });
+        
+        // Chiudi menu quando si clicca su un link
+        const navLinks = mainNav.querySelectorAll('a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    mainNav.classList.remove('active');
+                    const icon = mobileToggle.querySelector('i');
+                    icon.classList.remove('bi-x-lg');
+                    icon.classList.add('bi-list');
+                    console.log('Menu chiuso dopo click link (vanilla JS)');
+                }
+            });
+        });
+        
+        // Chiudi menu quando si ridimensiona la finestra
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                mainNav.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('bi-x-lg');
+                icon.classList.add('bi-list');
+            }
+        });
+        
+        // Chiudi menu quando si clicca fuori dal menu
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768 && 
+                !mainNav.contains(e.target) && 
+                !mobileToggle.contains(e.target)) {
+                mainNav.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('bi-x-lg');
+                icon.classList.add('bi-list');
+                console.log('Menu chiuso per click fuori (vanilla JS)');
+            }
+        });
+        
+    } else {
+        console.error('Elementi menu mobile non trovati con vanilla JS');
+        if (!mobileToggle) console.error('mobile-menu-toggle non trovato');
+        if (!mainNav) console.error('main-nav non trovato');
+    }
+});
 
 // CSS per le notificazioni (da aggiungere al CSS principale se necessario)
 const notificationCSS = `

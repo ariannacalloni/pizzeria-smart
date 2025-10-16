@@ -77,7 +77,7 @@ function pizzeria_egidio_scripts()
         null
     );
 
-    // Bootstrap CSS (ultima versione via jsDelivr)
+    // Bootstrap CSS (ultima versione via jsDelivr) 
     wp_enqueue_style(
         'bootstrap-css',
         'https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css',
@@ -85,7 +85,7 @@ function pizzeria_egidio_scripts()
         null
     );
 
-    // Stile principale
+    // Stile principale 
     wp_enqueue_style(
         'pizzeria-egidio-style',
         get_stylesheet_uri(),
@@ -101,23 +101,31 @@ function pizzeria_egidio_scripts()
         '1.0.0'
     );
 
-    // JS principale
-    wp_enqueue_script(
-        'pizzeria-egidio-script',
-        get_template_directory_uri() . '/assets/js/main.js',
-        array('jquery', 'bootstrap-js'),
-        '1.0.0',
-        true
+    // CSS mobile menu 
+    wp_enqueue_style(
+        'pizzeria-egidio-mobile-menu',
+        get_template_directory_uri() . '/assets/css/mobile-menu.css',
+        array('pizzeria-egidio-style', 'pizzeria-egidio-responsive'),
+        '1.0.0'
     );
 
     // Bootstrap JS (bundle include Popper) caricato in footer
-    wp_enqueue_script(
-        'bootstrap-js',
-        'https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js',
-        array(),
-        null,
-        true
-    );
+wp_enqueue_script(
+    'bootstrap-js',
+    'https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js',
+    array('jquery'),
+    null,
+    true
+);
+
+// JS principale - caricato DOPO Bootstrap per evitare conflitti
+wp_enqueue_script(
+    'pizzeria-egidio-script',
+    get_template_directory_uri() . '/assets/js/main.js',
+    array('jquery', 'bootstrap-js'),
+    '1.0.2',
+    true
+);
 
     // Localizzazione AJAX
     wp_localize_script('pizzeria-egidio-script', 'pizzeria_ajax', array(

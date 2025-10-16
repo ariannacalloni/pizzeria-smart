@@ -198,35 +198,21 @@ small {
     background: none;
     border: none;
     font-size: 1.5rem;
-    color: var(--dark-color);
+    color: var(--primary-color);
     cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    position: relative;
 }
 
-@media (max-width: 768px) {
-    .mobile-menu-toggle {
-        display: block;
-    }
-
-    .main-nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: white;
-        box-shadow: var(--shadow-md);
-    }
-
-    .main-nav.active {
-        display: block;
-    }
-
-    .main-nav ul {
-        flex-direction: column;
-        padding: var(--spacing-sm);
-        gap: var(--spacing-sm);
-    }
+/* Colore icona burger */
+#mobile-menu-toggle i {
+    color: var (--primary-color);
+    font-size: 1.8rem; 
+    transition: color 0.3s ease; 
 }
+
+
 
 /* Hero Banner */
 .hero-banner {
@@ -243,9 +229,9 @@ small {
 }
 
 /* Hero banner con immagine quando disponibile */
-.hero-banner.has-bg-image {
-    /* background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/images/hero-bg.jpg'); */
-}
+/* .hero-banner.has-bg-image {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/images/hero-bg.jpg');
+} */
 
 /* Velina nera per hero con immagine: overlay scura semitrasparente
    posizionata tra lo sfondo e il contenuto per migliorare leggibilità */
@@ -331,7 +317,8 @@ small {
 }
 
 .btn-primary:hover {
-    background: #b8941f;
+    background: var(--white);
+    color: var(--primary-color);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
